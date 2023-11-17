@@ -1,9 +1,10 @@
 <div align="center">
 
 <h1>RVC Data Prep: An Open-Source RVC Data Preparation Tool</h1>
-a ChapterX initiative <br> <br>
+a Dubverse Black initiative <br> <br>
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1NA2GuJ2y-zRfoG3NearNiMCQa8NbidSh?usp=sharing)
+![Discord Shield](https://discordapp.com/api/guilds/1162007551987171410/widget.png?style=shield)
 
 </div>
 
@@ -63,7 +64,7 @@ We are always open to hear from others who share our passion. Whether you're an 
 
 
 ## License 
-RVC Data Prep is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+RVC Data Prep is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 *Disclaimer: This repo is not affiliated with YouTube, Facebook AI Research, or Pyannote. All trademarks referred to are the property of their respective owners.*
 
