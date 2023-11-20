@@ -4,7 +4,7 @@
 a Dubverse Black initiative <br> <br>
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1NA2GuJ2y-zRfoG3NearNiMCQa8NbidSh?usp=sharing)
-![Discord Shield](https://discordapp.com/api/guilds/1162007551987171410/widget.png?style=shield)
+[![Discord Shield](https://discordapp.com/api/guilds/1162007551987171410/widget.png?style=shield)](https://discord.gg/4VGnrgpBN)
 
 </div>
 
