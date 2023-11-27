@@ -5,7 +5,6 @@ a Dubverse Black initiative <br> <br>
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1NA2GuJ2y-zRfoG3NearNiMCQa8NbidSh?usp=sharing)
 [![Discord Shield](https://discordapp.com/api/guilds/1162007551987171410/widget.png?style=shield)](https://discord.gg/4VGnrgpBN)
-
 </div>
 
 ------
@@ -17,6 +16,7 @@ RVC Data Prep is an advanced tool for transforming audio/video content into isol
 1. Isolate vocals from YouTube videos
 2. Distinguish multiple speakers and provide separate files
 3. Trim silences greated than 300ms from the audio
+4. (Beta) Separate multi-singer Acapellas
 
 ## Prerequisites
 Before you start using this tool, ensure that you have the following installed:
@@ -27,11 +27,51 @@ Before you start using this tool, ensure that you have the following installed:
 
 ## How to use
 
-1. Start by first cloning the repository.
-2. Run the Jupyter notebook locally or on Google Colab
-3. Input a YouTube video link and wait for it to process
+Clone the repository
 
-*(Integration with the RVC UI is parked for later)*
+``` bash
+git clone https://github.com/dubverse-ai/rvc-data-prep.git
+```
+
+Change working directory, install dependencies and import the utils.py script
+
+``` bash
+cd rvc-data-prep
+pip install -r requirements.txt
+```
+
+The `clean` function in `utils.py` provides automatic processing of a given file (wav, mp3 and flac only). You need to specify different parameters depending on your needs.
+Parameters:
+
+- `local` _(bool)_: Set this to `True` if you intend to give a file locally; `False` if you intend to create a dataset from a YouTube link.
+
+- `file_path` _(str)_: This should be either a local path or a YouTube URL file depending on what you set `local` to be.
+
+- `project_name` _(str)_: This will be the name of the project which the processed file will be saved under.
+
+- `acapella_output` _(bool)_: (BETA) If this is `True`, the function insert blank audio segments while separating and segregrating speakers. The output files will add up in the time domain to create the original file.
+
+- `single_speaker_file` _(bool)_: If `True`, this will flag the file as having a single speaker.
+
+- `token` _(str)_: It is client secret key or token of your Hugging Face account. You would only need this if you're working with files involving multiple speakers. You can leave this blank in that case.
+
+Here is an example to use the clean function:
+
+```python
+from logic import clean
+
+clean(local=False, 
+      file_path="https://www.youtube.com/watch?v=someVideoId", 
+      project_name="myProject", 
+      acapella_output=True, 
+      token="yourToken", 
+      single_speaker_file=False)
+```
+In this example, we are providing a YouTube video url to `file_path`, setting the `project_name` as "myProject", and requesting for an acapella output by setting `acapella_output` to `True`. We indicate there may be more than one speaker by setting `single_speaker_file` to `False`, and pass our account token as `token`. 
+
+## YouTube Tutorial
+[![YOUTUBE TUTORIAL](https://img.youtube.com/vi/QLQ8eSGZDi8/0.jpg)](https://www.youtube.com/watch?v=QLQ8eSGZDi8)
+
 
 ## Examples
 | **Input Video**                                                                       | **Separated Files**                                                                                                                                                                                                                                         |
@@ -39,6 +79,11 @@ Before you start using this tool, ensure that you have the following installed:
 | [Shahrukh Khan's Speech](https://www.youtube.com/shorts/tsgWNmVU_B0)                  | [Vocals](https://dl.sndup.net/qhp6/srk-cleaned.mp3)                                                                                                                                                                                                         |
 | [Yeh Ladka Haaye Allah - Bollywood Song](https://www.youtube.com/watch?v=BE8_rNJOQ-0) | [Udit Narayan's Vocals](https://dl.sndup.net/rqmp/SPEAKER_00.mp3), [Alka Yagnik's Vocals](https://dl.sndup.net/rg4g/SPEAKER_02.mp3), [Chorous](https://dl.sndup.net/d8s9/SPEAKER_01.mp3), [Other ambigous sounds](https://dl.sndup.net/wd2y/SPEAKER_03.mp3) |
 | [Perfect - Ed Sheeran Duet](https://www.youtube.com/watch?v=817P8W8-mGE)              | [Ed Sheeran's Vocals](https://dl.sndup.net/gmjf/perfect.mp3), [Beyonce's Vocals](https://dl.sndup.net/h4qs/perfectf.mp3)                                                                                                                                    |
+
+## Known Issues
+* Messes up when there are multiple people speaking at the same time
+* When using `acapella = True`, this sometimes skips some audio segments which makes it hard to sync manually. 
+
 ## Contributing 
 We welcome contributions from anyone and everyone. Details about how to contribute, what we are looking for and how to get started can be found in our contributing guidelines.
 
@@ -46,7 +91,7 @@ We welcome contributions from anyone and everyone. Details about how to contribu
 For any issues, queries, and suggestions, join our [Discord server](https://discord.gg/4VGnrgpBN). Will be glad to help!
 
 ## Future Scope
-- Enhance the precision of vocal isolation
+- Add multispeaker Acapella support
 - Integrate this in the RVC workflow - base data preparation and creating AI covers
 - Improve the efficiencies of speaker identification using other models like Titanet
 
@@ -69,10 +114,8 @@ RVC Data Prep is licensed under the MIT License - see the [LICENSE](LICENSE) fil
 *Disclaimer: This repo is not affiliated with YouTube, Facebook AI Research, or Pyannote. All trademarks referred to are the property of their respective owners.*
 
 ## Acknowledgements
-1. FaceBook Demucs
-2. Pyannote Audio
-3. Librosa
-4. FFMPEG
+1. FaceBook Demucs, Pyannote Audio, Librosa, FFMPEG, and other audio related libraries.
+2. The Dubverse Black Discord and the AI Hub Discord for quick and actionable feedback. 
 
 -----------------------------------------------------------------------------
 
