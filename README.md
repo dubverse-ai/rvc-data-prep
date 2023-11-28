@@ -58,7 +58,7 @@ Parameters:
 Here is an example to use the clean function:
 
 ```python
-from logic import clean
+from utils import clean
 
 clean(local=False, 
       file_path="https://www.youtube.com/watch?v=someVideoId", 
